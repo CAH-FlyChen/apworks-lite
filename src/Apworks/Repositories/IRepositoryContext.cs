@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Apworks.Repositories
 {
-    public interface IRepositoryContext : IUnitOfWork
+    public interface IRepositoryContext : IUnitOfWork, IDisposable
     {
         IRepository<TKey, TAggregateRoot> GetRepository<TKey, TAggregateRoot>()
             where TAggregateRoot : IAggregateRoot<TKey>

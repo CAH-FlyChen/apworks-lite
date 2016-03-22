@@ -10,8 +10,6 @@ namespace Apworks.Repositories
         where TAggregateRoot : IAggregateRoot<TKey>
         where TKey : IEquatable<TKey>
     {
-        IRepositoryContext UnitOfWork { get; }
-
         Task<IQueryable<TAggregateRoot>> FindAllAsync();
     }
 }

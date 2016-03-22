@@ -17,7 +17,7 @@ namespace Apworks.Repositories
             this.context = context;
         } 
 
-        public IRepositoryContext UnitOfWork
+        public IRepositoryContext Context
         {
             get
             {
