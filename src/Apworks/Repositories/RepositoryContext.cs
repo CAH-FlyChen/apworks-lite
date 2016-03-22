@@ -18,6 +18,11 @@ namespace Apworks.Repositories
             where TKey : IEquatable<TKey>
             where TAggregateRoot : IAggregateRoot<TKey>;
 
+        internal IEnumerable<KeyValuePair<Type, object>> CachedRepositories
+        {
+            get { return cachedRepositories; }
+        }
+
         public abstract Task CommitAsync();
 
         public IRepository<TKey, TAggregateRoot> GetRepository<TKey, TAggregateRoot>()
