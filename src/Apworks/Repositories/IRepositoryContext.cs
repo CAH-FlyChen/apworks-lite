@@ -9,7 +9,7 @@ namespace Apworks.Repositories
     public interface IRepositoryContext : IUnitOfWork, IDisposable
     {
         IRepository<TKey, TAggregateRoot> GetRepository<TKey, TAggregateRoot>()
-            where TAggregateRoot : IAggregateRoot<TKey>
+            where TAggregateRoot : class, IAggregateRoot<TKey>
             where TKey : IEquatable<TKey>;
     }
 }

@@ -10,7 +10,7 @@ namespace Apworks.Repositories.EntityFramework
 {
     internal sealed class EntityFrameworkRepository<TKey, TAggregateRoot> : Repository<TKey, TAggregateRoot>
         where TKey : IEquatable<TKey>
-        where TAggregateRoot : IAggregateRoot<TKey>
+        where TAggregateRoot : class, IAggregateRoot<TKey>
     {
         private readonly DbContext dbContext;
 
@@ -24,9 +24,9 @@ namespace Apworks.Repositories.EntityFramework
             }
         }
 
-        public override Task<IQueryable<TAggregateRoot>> FindAllAsync()
+        public override IQueryable<TAggregateRoot> FindAll()
         {
-            throw new NotImplementedException();
+            return this.dbContext.Set<TAggregateRoot>();
         }
     }
 }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace Apworks.Repositories
 {
     public interface IRepository<TKey, TAggregateRoot>
-        where TAggregateRoot : IAggregateRoot<TKey>
+        where TAggregateRoot : class, IAggregateRoot<TKey>
         where TKey : IEquatable<TKey>
     {
-        Task<IQueryable<TAggregateRoot>> FindAllAsync();
+        IQueryable<TAggregateRoot> FindAll();
     }
 }

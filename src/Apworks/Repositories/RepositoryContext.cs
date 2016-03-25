@@ -16,7 +16,7 @@ namespace Apworks.Repositories
 
         protected abstract IRepository<TKey, TAggregateRoot> CreateRepository<TKey, TAggregateRoot>()
             where TKey : IEquatable<TKey>
-            where TAggregateRoot : IAggregateRoot<TKey>;
+            where TAggregateRoot : class, IAggregateRoot<TKey>;
 
         internal IEnumerable<KeyValuePair<Type, object>> CachedRepositories
         {
@@ -27,7 +27,7 @@ namespace Apworks.Repositories
 
         public IRepository<TKey, TAggregateRoot> GetRepository<TKey, TAggregateRoot>()
             where TKey : IEquatable<TKey>
-            where TAggregateRoot : IAggregateRoot<TKey>
+            where TAggregateRoot : class, IAggregateRoot<TKey>
         {
             return (IRepository<TKey, TAggregateRoot>)cachedRepositories.GetOrAdd(typeof(TAggregateRoot), CreateRepository<TKey, TAggregateRoot>());
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Apworks.Repositories
 {
     public abstract class Repository<TKey, TAggregateRoot> : IRepository<TKey, TAggregateRoot>
-        where TAggregateRoot : IAggregateRoot<TKey>
+        where TAggregateRoot : class, IAggregateRoot<TKey>
         where TKey : IEquatable<TKey>
     {
         private readonly IRepositoryContext context;
@@ -15,16 +15,10 @@ namespace Apworks.Repositories
         protected Repository(IRepositoryContext context)
         {
             this.context = context;
-        } 
-
-        public IRepositoryContext Context
-        {
-            get
-            {
-                return this.context;
-            }
         }
 
-        public abstract Task<IQueryable<TAggregateRoot>> FindAllAsync();
+        public IRepositoryContext Context => this.context;
+
+        public abstract IQueryable<TAggregateRoot> FindAll();
     }
 }

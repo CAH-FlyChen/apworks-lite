@@ -3,6 +3,7 @@ using Apworks.Repositories.EntityFramework;
 using Moq;
 using NUnit.Framework;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -42,6 +43,39 @@ namespace Apworks.Tests
             var repositoryContext = new EntityFrameworkRepositoryContext(dbContext.Object);
             var repository = repositoryContext.GetRepository<Guid, Customer>();
             Assert.AreEqual(1, repositoryContext.CachedRepositories.Count());
+        }
+
+        [Test]
+        public void GetRepositoryMultiThreadingTest()
+        {
+            var dbContext = new Mock<DbContext>();
+            var repositoryContext = new EntityFrameworkRepositoryContext(dbContext.Object);
+            var taskCount = 1000;
+            var taskList = new List<Task>();
+            for (var i = 0; i < taskCount; i++)
+            {
+                taskList.Add(Task.Run(() => repositoryContext.GetRepository<Guid, Customer>()));
+            }
+            Task.WaitAll(taskList.ToArray());
+            Assert.AreEqual(1, repositoryContext.CachedRepositories.Count());
+        }
+
+        [Test]
+        public void GetRepositoryMultiThreadingRepositoryInstanceTest()
+        {
+            var dbContext = new Mock<DbContext>();
+            var repositoryContext = new EntityFrameworkRepositoryContext(dbContext.Object);
+            var bag = new ConcurrentBag<IRepository<Guid, Customer>>();
+            var taskCount = 1000;
+            var taskList = new List<Task>();
+            for (var i = 0; i < taskCount; i++)
+            {
+                taskList.Add(Task.Run(() => bag.Add(repositoryContext.GetRepository<Guid, Customer>())));
+            }
+            Task.WaitAll(taskList.ToArray());
+            Assert.AreEqual(1000, bag.Count); // Ensure that every thread
+            Assert.IsTrue(bag.All(x => x != null));
+            Assert.IsTrue(bag.Distinct().Count() == 1);
         }
     }
 }
