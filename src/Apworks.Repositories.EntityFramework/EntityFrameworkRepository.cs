@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Apworks.Specifications;
 
 namespace Apworks.Repositories.EntityFramework
 {
@@ -28,5 +29,26 @@ namespace Apworks.Repositories.EntityFramework
         {
             return this.dbContext.Set<TAggregateRoot>();
         }
+
+        public override void Add(TAggregateRoot aggregateRoot)
+        {
+            this.dbContext.Entry(aggregateRoot).State = EntityState.Added;
+        }
+
+        public override void Update(TAggregateRoot aggregateRoot)
+        {
+            this.dbContext.Entry(aggregateRoot).State = EntityState.Modified;
+        }
+
+        public override void Remove(TAggregateRoot aggregateRoot)
+        {
+            this.dbContext.Entry(aggregateRoot).State = EntityState.Deleted;
+        }
+
+        public override bool Exists(Specification<TAggregateRoot> specification)
+        {
+            return this.dbContext.Set<TAggregateRoot>().Any(specification);
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Apworks.Specifications;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,5 +21,13 @@ namespace Apworks.Repositories
         public IRepositoryContext Context => this.context;
 
         public abstract IQueryable<TAggregateRoot> FindAll();
+
+        public abstract void Add(TAggregateRoot aggregateRoot);
+
+        public abstract void Update(TAggregateRoot aggregateRoot);
+
+        public abstract void Remove(TAggregateRoot aggregateRoot);
+
+        public abstract bool Exists(Specification<TAggregateRoot> specification);
     }
 }

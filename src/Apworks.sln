@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apworks.Tests", "..\tests\A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9C2035B5-5777-40C0-A871-F7026E206A6C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{A0441317-FEF6-4B7C-80CD-3F8209A11D23}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apworks.Repositories.EntityFramework", "Apworks.Repositories.EntityFramework\Apworks.Repositories.EntityFramework.csproj", "{DF2DE880-0325-4076-83EE-68AD4F0699E2}"
 EndProject
 Global

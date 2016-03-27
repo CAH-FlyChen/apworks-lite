@@ -15,11 +15,6 @@ namespace Apworks.Tests
     [TestFixture]
     public class EntityFrameworkRepositoryTests
     {
-        internal class Customer : IAggregateRoot<Guid>
-        {
-            public Guid Id { get; set; }
-        }
-
         [Test]
         public void RepositoryInitializationTest()
         {
