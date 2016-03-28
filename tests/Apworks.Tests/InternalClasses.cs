@@ -12,7 +12,15 @@ namespace Apworks.Tests
     {
         public Guid Id { get; set; }
 
+        public Name Name { get; set; }
+
         public int Age { get; set; }
+    }
+
+    internal class Name
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 
     internal class AgeGreaterThan30Specification : Specification<Customer>
