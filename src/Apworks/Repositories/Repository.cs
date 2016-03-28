@@ -1,4 +1,5 @@
-﻿using Apworks.Specifications;
+﻿using Apworks.Querying;
+using Apworks.Specifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace Apworks.Repositories
         public IRepositoryContext Context => this.context;
 
         public abstract IQueryable<TAggregateRoot> FindAll();
+
+        public abstract IQueryable<TAggregateRoot> FindAll(Specification<TAggregateRoot> specification, SortSpecification<TKey, TAggregateRoot> sortSpecification);
 
         public abstract void Add(TAggregateRoot aggregateRoot);
 

@@ -1,4 +1,5 @@
-﻿using Apworks.Specifications;
+﻿using Apworks.Querying;
+using Apworks.Specifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace Apworks.Repositories
         where TKey : IEquatable<TKey>
     {
         IQueryable<TAggregateRoot> FindAll();
+
+        IQueryable<TAggregateRoot> FindAll(Specification<TAggregateRoot> specification, SortSpecification<TKey, TAggregateRoot> sortSpecification);
 
         void Add(TAggregateRoot aggregateRoot);
 

@@ -8,6 +8,11 @@ using System.Threading.Tasks;
 
 namespace Apworks.Querying
 {
+    /// <summary>
+    /// Represents the sort specification in a query that is used for defining the sort field and order.
+    /// </summary>
+    /// <typeparam name="TKey">The type of the aggregate root key.</typeparam>
+    /// <typeparam name="TAggregateRoot">The type of the aggregate root.</typeparam>
     public sealed class SortSpecification<TKey, TAggregateRoot> : IDictionary<string, SortOrder>
         where TKey : IEquatable<TKey>
         where TAggregateRoot : class, IAggregateRoot<TKey>
@@ -30,6 +35,8 @@ namespace Apworks.Querying
         #endregion 
 
         private readonly Dictionary<string, SortOrder> sortSpecifications = new Dictionary<string, SortOrder>();
+
+        public static readonly SortSpecification<TKey, TAggregateRoot> None = new SortSpecification<TKey, TAggregateRoot>() { { x => x.Id, SortOrder.Unspecified } };
 
         public SortOrder this[string key]
         {
@@ -82,9 +89,9 @@ namespace Apworks.Querying
             Expression body = param;
             foreach (var member in propertyName.Split('.'))
             {
-                body = Expression.PropertyOrField(body, member);
+                body = Expression.Property(body, member);
             }
-            return Expression.Lambda<Func<TAggregateRoot, object>>(body, param);
+            return Expression.Lambda<Func<TAggregateRoot, object>>(Expression.Convert(body, typeof(object)), param);
         }
 
         public void Add(KeyValuePair<string, SortOrder> item)

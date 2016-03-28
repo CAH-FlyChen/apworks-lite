@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Apworks.Specifications;
+using Apworks.Querying;
+using System.Linq.Expressions;
 
 namespace Apworks.Repositories.EntityFramework
 {
@@ -27,7 +29,46 @@ namespace Apworks.Repositories.EntityFramework
 
         public override IQueryable<TAggregateRoot> FindAll()
         {
-            return this.dbContext.Set<TAggregateRoot>();
+            return FindAll(new AnySpecification<TAggregateRoot>(), SortSpecification<TKey, TAggregateRoot>.None);
+        }
+
+        public override IQueryable<TAggregateRoot> FindAll(Specification<TAggregateRoot> specification, SortSpecification<TKey, TAggregateRoot> sortSpecification)
+        {
+            var query = this.dbContext.Set<TAggregateRoot>().Where(specification);
+            IOrderedQueryable<TAggregateRoot> orderedQueryable;
+            if (sortSpecification?.Count > 0)
+            {
+                var sortSpecificationList = sortSpecification.Specifications.ToList();
+                var firstSortSpecification = sortSpecificationList[0];
+                switch(firstSortSpecification.Item2)
+                {
+                    case SortOrder.Ascending:
+                        orderedQueryable = query.OrderBy(firstSortSpecification.Item1);
+                        break;
+                    case SortOrder.Descending:
+                        orderedQueryable = query.OrderByDescending(firstSortSpecification.Item1);
+                        break;
+                    default:
+                        return query;
+                }
+                for (var i = 1; i < sortSpecificationList.Count; i++)
+                {
+                    var spec = sortSpecificationList[i];
+                    switch(spec.Item2)
+                    {
+                        case SortOrder.Ascending:
+                            orderedQueryable = orderedQueryable.ThenBy(spec.Item1);
+                            break;
+                        case SortOrder.Descending:
+                            orderedQueryable = orderedQueryable.ThenByDescending(spec.Item1);
+                            break;
+                        default:
+                            continue;
+                    }
+                }
+                return orderedQueryable;
+            }
+            return query;
         }
 
         public override void Add(TAggregateRoot aggregateRoot)
