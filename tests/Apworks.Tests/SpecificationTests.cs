@@ -57,7 +57,26 @@ namespace Apworks.Tests
         [Test]
         public void ExpressionSpecificationTest()
         {
+            Expression<Func<Customer, bool>> expr = x => x.SerialNumber == "C001";
+            var specification = new ExpressionSpecification<Customer>(expr);
+            var query = customers.Where(specification.IsSatisfiedBy);
+            Assert.AreEqual(4, query.Count());
+        }
 
+        [Test]
+        public void NoneSpecificationTest()
+        {
+            var specification = new NoneSpecification<Customer>();
+            var query = customers.Where(specification.IsSatisfiedBy);
+            Assert.AreEqual(0, query.Count());
+        }
+
+        [Test]
+        public void OrSpecificationTest()
+        {
+            var specification = new AgeGreaterThan30Specification().Or(new SerialNumberEqualsSpecification("A001"));
+            var query = customers.Where(specification.IsSatisfiedBy);
+            Assert.AreEqual(6, query.Count());
         }
 
         [Test]
