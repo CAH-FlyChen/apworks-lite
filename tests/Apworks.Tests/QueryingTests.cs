@@ -13,11 +13,11 @@ namespace Apworks.Tests
     public class QueryingTests
     {
         private readonly List<Customer> customers = new List<Customer> {
-            new Customer { Id = Guid.NewGuid(), Age = 20 },
-            new Customer { Id = Guid.NewGuid(), Age = 30 },
-            new Customer { Id = Guid.NewGuid(), Age = 35 },
-            new Customer { Id = Guid.NewGuid(), Age = 40 },
-            new Customer { Id = Guid.NewGuid(), Age = 10 }
+            new Customer { Id = Guid.NewGuid(), Age = 20 , SerialNumber = "A001" },
+            new Customer { Id = Guid.NewGuid(), Age = 30 , SerialNumber = "A001"},
+            new Customer { Id = Guid.NewGuid(), Age = 35 , SerialNumber = "B001"},
+            new Customer { Id = Guid.NewGuid(), Age = 40 , SerialNumber = "C001"},
+            new Customer { Id = Guid.NewGuid(), Age = 10 , SerialNumber = "C001"}
         };
 
         [Test]

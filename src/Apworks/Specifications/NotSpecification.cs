@@ -55,14 +55,7 @@ namespace Apworks.Specifications
         /// Gets the LINQ expression which represents the current specification.
         /// </summary>
         /// <returns>The LINQ expression.</returns>
-        public override Expression<Func<T, bool>> Expression
-        {
-            get
-            {
-                var body = System.Linq.Expressions.Expression.Not(this.spec.Expression.Body);
-                return System.Linq.Expressions.Expression.Lambda<Func<T, bool>>(body, this.spec.Expression.Parameters);
-            }
-        }
+        public override Expression<Func<T, bool>> Expression => this.spec.Expression.Not();
         #endregion
     }
 }
