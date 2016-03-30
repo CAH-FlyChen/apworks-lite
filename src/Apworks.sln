@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9C2035B5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apworks.Repositories.EntityFramework", "Apworks.Repositories.EntityFramework\Apworks.Repositories.EntityFramework.csproj", "{DF2DE880-0325-4076-83EE-68AD4F0699E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apworks.Tests.Integrated", "..\tests\Apworks.Tests.Integrated\Apworks.Tests.Integrated.csproj", "{2FB0795B-0A42-4AD1-B7E9-0442D185398D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,11 +31,16 @@ Global
 		{DF2DE880-0325-4076-83EE-68AD4F0699E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF2DE880-0325-4076-83EE-68AD4F0699E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF2DE880-0325-4076-83EE-68AD4F0699E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FB0795B-0A42-4AD1-B7E9-0442D185398D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FB0795B-0A42-4AD1-B7E9-0442D185398D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FB0795B-0A42-4AD1-B7E9-0442D185398D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FB0795B-0A42-4AD1-B7E9-0442D185398D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5776B569-32B6-460C-BF92-D243644B870A} = {9C2035B5-5777-40C0-A871-F7026E206A6C}
+		{2FB0795B-0A42-4AD1-B7E9-0442D185398D} = {9C2035B5-5777-40C0-A871-F7026E206A6C}
 	EndGlobalSection
 EndGlobal

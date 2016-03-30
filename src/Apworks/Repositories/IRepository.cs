@@ -13,6 +13,8 @@ namespace Apworks.Repositories
         where TAggregateRoot : class, IAggregateRoot<TKey>
         where TKey : IEquatable<TKey>
     {
+        Task<TAggregateRoot> GetByKeyAsync(TKey key);
+
         IQueryable<TAggregateRoot> FindAll();
 
         IQueryable<TAggregateRoot> FindAll(Specification<TAggregateRoot> specification, SortSpecification<TKey, TAggregateRoot> sortSpecification);

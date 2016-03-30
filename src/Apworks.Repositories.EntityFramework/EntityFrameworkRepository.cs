@@ -27,6 +27,11 @@ namespace Apworks.Repositories.EntityFramework
             }
         }
 
+        public override async Task<TAggregateRoot> GetByKeyAsync(TKey key)
+        {
+            return await this.dbContext.Set<TAggregateRoot>().FindAsync(key);
+        }
+
         public override IQueryable<TAggregateRoot> FindAll()
         {
             return FindAll(new AnySpecification<TAggregateRoot>(), SortSpecification<TKey, TAggregateRoot>.None);

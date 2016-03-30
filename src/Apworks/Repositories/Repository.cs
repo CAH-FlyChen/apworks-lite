@@ -21,6 +21,8 @@ namespace Apworks.Repositories
 
         public IRepositoryContext Context => this.context;
 
+        public abstract Task<TAggregateRoot> GetByKeyAsync(TKey key);
+
         public abstract IQueryable<TAggregateRoot> FindAll();
 
         public abstract IQueryable<TAggregateRoot> FindAll(Specification<TAggregateRoot> specification, SortSpecification<TKey, TAggregateRoot> sortSpecification);
