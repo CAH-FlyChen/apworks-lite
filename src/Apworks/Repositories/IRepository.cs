@@ -17,6 +17,8 @@ namespace Apworks.Repositories
 
         IQueryable<TAggregateRoot> FindAll();
 
+        IQueryable<TAggregateRoot> FindAll(Specification<TAggregateRoot> specification);
+
         IQueryable<TAggregateRoot> FindAll(Specification<TAggregateRoot> specification, SortSpecification<TKey, TAggregateRoot> sortSpecification);
 
         void Add(TAggregateRoot aggregateRoot);

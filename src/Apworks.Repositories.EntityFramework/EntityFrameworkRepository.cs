@@ -34,7 +34,12 @@ namespace Apworks.Repositories.EntityFramework
 
         public override IQueryable<TAggregateRoot> FindAll()
         {
-            return FindAll(new AnySpecification<TAggregateRoot>(), SortSpecification<TKey, TAggregateRoot>.None);
+            return FindAll(new AnySpecification<TAggregateRoot>(), null);
+        }
+
+        public override IQueryable<TAggregateRoot> FindAll(Specification<TAggregateRoot> specification)
+        {
+            return FindAll(specification, null);
         }
 
         public override IQueryable<TAggregateRoot> FindAll(Specification<TAggregateRoot> specification, SortSpecification<TKey, TAggregateRoot> sortSpecification)

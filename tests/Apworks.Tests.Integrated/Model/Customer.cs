@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Apworks.Tests.Integrated.Model
 {
-    public class Customer : IAggregateRoot<CustomerId>
+    public class Customer : IAggregateRoot<int>
     {
-        public CustomerId Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public int Age { get; set; }
 
         public DateTime DateOfBirth { get; set; }
 
