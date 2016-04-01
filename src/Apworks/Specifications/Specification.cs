@@ -96,8 +96,16 @@ namespace Apworks.Specifications
         /// <returns>The LINQ expression.</returns>
         public abstract Expression<Func<T, bool>> Expression { get; }
 
+        /// <summary>
+        /// Implicitly converts a given <see cref="Specification{T}"/> instance into a <see cref="Expression{TDelegate}"/> instance.
+        /// </summary>
+        /// <param name="specification"></param>
         public static implicit operator Expression<Func<T, bool>> (Specification<T> specification) => specification.Expression;
 
+        /// <summary>
+        /// Implicitly converts a given <see cref="Expression{TDelegate}"/> instance into a <see cref="Specification{T}"/> instance.
+        /// </summary>
+        /// <param name="expression"></param>
         public static implicit operator Specification<T>(Expression<Func<T, bool>> expression) => new ExpressionSpecification<T>(expression);
 
     }
